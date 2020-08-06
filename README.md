@@ -1,14 +1,12 @@
-# lidar_IMU_calib
+**The code will be available soon.**
 
-Targetless Calibration of LiDAR-IMU System Based on Continuous-time Batch Estimation
+# lidar_IMU_calib
 
 **lidar_IMU_calib** is a framework for calibrating the transformation between the 3D LiDAR and IMU. It's based on continuous-time batch estimation. IMU-based cost and LiDAR point-to-plane distance are minimized jointly, which renders the calibration problem well-constrained in general scenarios.
 
-The source code will be available after the publication of the related paper.
+**Author**: Jiajun Lv and Kewei Hu and Jinhong Xu from [APRIL Lab](https://github.com/APRIL-ZJU)
 
-**Author**: Jiajun Lv and Jinhong Xu from [APRIL Lab](https://github.com/APRIL-ZJU)
-
-
+**Related Paper:** Jiajun Lv, Jinhong Xu, Kewei Hu, Yong Liu, Xingxing Zuo. Targetless Calibration of LiDAR-IMU System Based on Continuous-time Batch Estimation. [[arxiv](https://arxiv.org/pdf/2007.14759.pdf)]
 
 ### Results
 
