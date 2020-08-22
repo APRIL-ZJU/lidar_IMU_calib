@@ -1,0 +1,6 @@
+[submodule "thirdparty/Pangolin"]
+	path = thirdparty/Pangolin
+	url = https://github.com/stevenlovegrove/Pangolin.git
+[submodule "thirdparty/Kontiki"]
+	path = thirdparty/Kontiki
+	url = https://github.com/APRIL-ZJU/Kontiki.git

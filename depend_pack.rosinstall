@@ -1,0 +1,5 @@
+- git:
+   local-name: ndt_omp
+   uri: https://github.com/APRIL-ZJU/ndt_omp.git
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="topic_imu"           default="/imu1/raw/data_withSync" />
+    <arg name="path_bag"            default="/home/$(env USER)/rosbag/VLP_16/Garage-01.bag" />
+    <arg name="bag_start"           default="1" />
+    <arg name="bag_durr"            default="30" />
+    <arg name="scan4map"            default="15" />
+    <arg name="lidar_model"         default="VLP_16" />
+    <arg name="ndtResolution"       default="0.5" /> <!-- 0.5 for indoor case and 1.0 for outdoor case -->
+
+    <arg name="time_offset_padding" default="0.015" />
+    <arg name="show_ui"    default="false" />
+
+    <node pkg="li_calib" type="li_calib_gui" name="li_calib_gui" output="screen">
+    <!-- <node pkg="li_calib" type="li_calib_gui" name="li_calib_gui" output="screen" clear_params="true" launch-prefix="gdb -ex run &#45;&#45;args">-->
+
+        <param name="topic_imu"         type="string"   value="$(arg topic_imu)" />
+        <param name="topic_lidar"       type="string"   value="/velodyne_packets" />
+        <param name="LidarModel"        type="string"   value="$(arg lidar_model)" />
+        <param name="path_bag"          type="string"   value="$(arg path_bag)" />
+        <param name="bag_start"         type="double"   value="$(arg bag_start)" />
+        <param name="bag_durr"          type="double"   value="$(arg bag_durr)" /> <!-- for data association -->
+        <param name="scan4map"          type="double"   value="$(arg scan4map)" />
+        <param name="ndtResolution"     type="double"   value="$(arg ndtResolution)" />
+
+        <param name="time_offset_padding"   type="double"   value="$(arg time_offset_padding)" />
+        <param name="show_ui"               type="bool"     value="$(arg show_ui)" />
+    </node>
+
+</launch>
