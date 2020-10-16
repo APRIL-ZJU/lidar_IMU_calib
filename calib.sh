@@ -31,10 +31,10 @@ scan4map=15
 timeOffsetPadding=0.015
 
 # For sensor modeling.
-gyroscope_noise=8.72665e-5
-accelerometer_noise=1.96133e-4
-lidar_noise=0.03
-imu_rate=250.0
+gyroscope_noise=0.001745
+accelerometer_noise=0.000588
+lidar_noise=0.02
+imu_rate=400.0
 
 show_ui=true  #false
 
