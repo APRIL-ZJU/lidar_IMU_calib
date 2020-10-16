@@ -45,18 +45,6 @@ public:
           gyro_bias(Eigen::Vector3d(0,0,0)),
           acce_bias(Eigen::Vector3d(0,0,0)) {
 
-    double gyroscope_noise_density = 1.745e-4;
-    double accelerometer_noise_density = 5.88e-4;
-    double imu_rate = 400.0;
-    double lidar_noise = 0.02;
-
-    double gyro_discrete = gyroscope_noise_density * std::sqrt(imu_rate);
-    double acce_discrete = accelerometer_noise_density * std::sqrt(imu_rate);
-
-    global_opt_gyro_weight = 1.0 / std::pow(gyro_discrete, 2);  // 8.21e4
-    global_opt_acce_weight = 1.0 / std::pow(acce_discrete, 2);  // 7.23e3
-    global_opt_lidar_weight = 1.0 / std::pow(lidar_noise, 2);   // 2.5e3
-
     // fine-tuned parameter
     global_opt_gyro_weight = 28.0;
     global_opt_acce_weight = 18.5;
@@ -85,6 +73,29 @@ public:
 
   void set_acce_bias(Eigen::Vector3d ab) {
     acce_bias = ab;
+  }
+
+  void set_opt_weights(const double gyroscope_noise,
+                       const double accelerometer_noise,
+                       const double lidar_noise,
+                       const double imu_rate) {
+    double gyro_discrete = gyroscope_noise * std::sqrt(imu_rate);
+    double acce_discrete = accelerometer_noise * std::sqrt(imu_rate);
+
+    global_opt_gyro_weight = 1.0 / std::pow(gyro_discrete, 2);
+    global_opt_acce_weight = 1.0 / std::pow(acce_discrete, 2);
+    global_opt_lidar_weight = 1.0 / std::pow(lidar_noise, 2);
+  }
+
+  bool areSensorParamsDefault(const double gyroscope_noise,
+                              const double accelerometer_noise,
+                              const double lidar_noise,
+                              const double imu_rate,
+                              const double tol = 1e-6) {
+    return( (fabs(default_gyro_noise_density_ - gyroscope_noise) < tol) &&
+            (fabs(default_accel_noise_density_ - accelerometer_noise) < tol) &&
+            (fabs(default_lidar_noise_ - lidar_noise) < tol) &&
+            (fabs(default_imu_rate_ - imu_rate) < tol) );
   }
 
   void showStates() const {
@@ -133,6 +144,15 @@ public:
   Eigen::Vector3d gyro_bias;
 
   Eigen::Vector3d acce_bias;
+
+  ///default sensor parameters
+  double default_gyro_noise_density_ = 1.745e-4;
+
+  double default_accel_noise_density_ = 5.88e-4;
+
+  double default_lidar_noise_ = 0.02;
+
+  double default_imu_rate_ = 400.0;
 
   ///weight
   double global_opt_gyro_weight;
