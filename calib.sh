@@ -24,10 +24,17 @@ imu_topic_name=(
 #"/imu3/data_sync"
 )
 
+# For data association.
 bag_start=1
 bag_durr=30
 scan4map=15
 timeOffsetPadding=0.015
+
+# For sensor modeling.
+gyroscope_noise=8.72665e-5
+accelerometer_noise=1.96133e-4
+lidar_noise=0.03
+imu_rate=250.0
 
 show_ui=true  #false
 
@@ -58,6 +65,10 @@ for i in "${!sync_bag_name[@]}"; do
                           lidar_model:="VLP_16" \
                           time_offset_padding:="${timeOffsetPadding}"\
                           ndtResolution:="${ndtResolution}" \
-                          show_ui:="${show_ui}"
+                          show_ui:="${show_ui}" \
+                          gyroscope_noise:="${gyroscope_noise}" \
+                          accelerometer_noise:="${accelerometer_noise}" \
+                          lidar_noise:="${lidar_noise}" \
+                          imu_rate:="${imu_rate}"
     done
 done

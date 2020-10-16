@@ -40,6 +40,8 @@ CalibrHelper::CalibrHelper(ros::NodeHandle& nh)
   double scan4map;
   double knot_distance;
   double time_offset_padding;
+  double gyroscope_noise, accelerometer_noise, lidar_noise;
+  double imu_rate;
 
   nh.param<std::string>("path_bag", bag_path_, "V1_01_easy.bag");
   nh.param<std::string>("topic_imu", topic_imu_, "/imu0");
@@ -50,6 +52,10 @@ CalibrHelper::CalibrHelper(ros::NodeHandle& nh)
   nh.param<double>("ndtResolution", ndt_resolution_, 0.5);
   nh.param<double>("time_offset_padding", time_offset_padding, 0.015);
   nh.param<double>("knot_distance", knot_distance, 0.02);
+  nh.param<double>("gyroscope_noise", gyroscope_noise, 1.745e-4);
+  nh.param<double>("accelerometer_noise", accelerometer_noise, 5.88e-4);
+  nh.param<double>("lidar_noise", lidar_noise, 0.02);
+  nh.param<double>("imu_rate", imu_rate, 400.0);
 
   if (!createCacheFolder(bag_path_)) {
     calib_step_ = Error;
@@ -79,6 +85,12 @@ CalibrHelper::CalibrHelper(ros::NodeHandle& nh)
 
   traj_manager_ = std::make_shared<TrajectoryManager>(
           map_time_, end_time, knot_distance, time_offset_padding);
+  /// if sensor parameters are not the default, update optimization weights
+  if (!traj_manager_->getCalibParamManager()->areSensorParamsDefault(
+          gyroscope_noise, accelerometer_noise, lidar_noise, imu_rate)) {
+    traj_manager_->getCalibParamManager()->set_opt_weights(
+          gyroscope_noise, accelerometer_noise, lidar_noise, imu_rate);
+  }
 
   scan_undistortion_ = std::make_shared<ScanUndistortion>(
           traj_manager_, dataset_reader_);
