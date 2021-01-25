@@ -16,7 +16,7 @@
 
 - [Kontiki](https://github.com/APRIL-ZJU/Kontiki) (Continuous-Time Toolkit)
 - Pangolin (for visualization and user interface)
-- [ndt_omp](https://github.com/APRIL-ZJU/ndt_omp) 
+- [ndt_omp](https://github.com/HTLife/ndt_omp) 
 
 Note that **Kontiki** and **Pangolin** are included in the *thirdparty* folder.
 
