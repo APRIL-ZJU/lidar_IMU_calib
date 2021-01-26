@@ -40,10 +40,6 @@ COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04 \
     /usr/share/glvnd/egl_vendor.d/10_nvidia.json \
     /usr/share/glvnd/egl_vendor.d/10_nvidia.json
 
-RUN apt-get update && \
-    apt-get install -y libglew-dev && \
-    rm -rf /var/lib/apt/lists/*
-
 # Prerequisites
 RUN adduser $your_name
 RUN curl http://ceres-solver.org/ceres-solver-1.14.0.tar.gz --output ceres-solver-1.14.0.tar.gz
@@ -51,8 +47,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgoogle-glog-dev libatlas-base-dev libeigen3-dev libsuitesparse-dev
 RUN tar zxf ceres-solver-1.14.0.tar.gz && mkdir ceres-bin && cd ceres-bin && cmake ../ceres-solver-1.14.0 && make -j3 && make install
 
+RUN apt-get update && \
+    apt-get install -y libglew-dev ros-melodic-velodyne-msgs && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN /bin/bash -c "mkdir -p /workspace/src && cd /workspace/src && git clone https://github.com/HTLife/lidar_IMU_calib"
-RUN /bin/bash -c "cd /workspace/src && git clone https://github.com/HTLife/ndt_omp"
+RUN /bin/bash -c "cd /workspace/src && git clone https://github.com/HTLife/ndt_omp && cd ndt_omp && git checkout koide3_APRIL-ZJU"
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && cd /workspace/src/lidar_IMU_calib && bash ./build_submodules.sh && cd /workspace && catkin_make -DCMAKE_BUILD_TYPE=Release"
 
 RUN echo "" >> ~/.bashrc
