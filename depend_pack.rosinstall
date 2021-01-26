@@ -1,5 +1,6 @@
 - git:
    local-name: ndt_omp
+   version: koide3_APRIL-ZJU
    uri: https://github.com/HTLife/ndt_omp.git
 
 
