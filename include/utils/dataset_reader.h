@@ -21,7 +21,38 @@
 #ifndef DATASET_READER_H
 #define DATASET_READER_H
 
+#define LZ4_stream_t LZ4_stream_t_deprecated
+#define LZ4_resetStream LZ4_resetStream_deprecated
+#define LZ4_createStream LZ4_createStream_deprecated
+#define LZ4_freeStream LZ4_freeStream_deprecated
+#define LZ4_loadDict LZ4_loadDict_deprecated
+#define LZ4_compress_fast_continue LZ4_compress_fast_continue_deprecated
+#define LZ4_saveDict LZ4_saveDict_deprecated
+#define LZ4_streamDecode_t LZ4_streamDecode_t_deprecated
+#define LZ4_compress_continue LZ4_compress_continue_deprecated
+#define LZ4_compress_limitedOutput_continue LZ4_compress_limitedOutput_continue_deprecated
+#define LZ4_createStreamDecode LZ4_createStreamDecode_deprecated
+#define LZ4_freeStreamDecode LZ4_freeStreamDecode_deprecated
+#define LZ4_setStreamDecode LZ4_setStreamDecode_deprecated
+#define LZ4_decompress_safe_continue LZ4_decompress_safe_continue_deprecated
+#define LZ4_decompress_fast_continue LZ4_decompress_fast_continue_deprecated
 #include <rosbag/bag.h>
+#undef LZ4_stream_t
+#undef LZ4_resetStream
+#undef LZ4_createStream
+#undef LZ4_freeStream
+#undef LZ4_loadDict
+#undef LZ4_compress_fast_continue
+#undef LZ4_saveDict
+#undef LZ4_streamDecode_t
+#undef LZ4_compress_continue
+#undef LZ4_compress_limitedOutput_continue
+#undef LZ4_createStreamDecode
+#undef LZ4_freeStreamDecode
+#undef LZ4_setStreamDecode
+#undef LZ4_decompress_safe_continue
+#undef LZ4_decompress_fast_continue
+
 #include <rosbag/view.h>
 #include <boost/foreach.hpp>
 #include <geometry_msgs/PointStamped.h>
