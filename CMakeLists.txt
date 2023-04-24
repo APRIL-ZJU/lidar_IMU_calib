@@ -26,6 +26,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system filesystem thread date_time)
+find_package(CUDA  REQUIRED)
+include_directories("${CUDA_INCLUDE_DIRS}")
 
 set(PANGOLIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/build-pangolin")
 find_package(Pangolin REQUIRED)

@@ -162,7 +162,7 @@ void CalibInterface::renderingLoop() {
         double scale = (double)dataset_reader_->get_scan_data().size() / SCAN_LENGTH;
         size_t frame_id = scale * show_lidar_frame_;
         if (frame_id < dataset_reader_->get_scan_data().size()) {
-          pcl::uint64_t t = dataset_reader_->get_scan_data().at(frame_id).header.stamp;
+          uint64_t t = dataset_reader_->get_scan_data().at(frame_id).header.stamp;
           auto iter = scan_undistortion_->get_scan_data_in_map().find(t);
           if (iter != scan_undistortion_->get_scan_data_in_map().end()) {
             glPointSize(1);

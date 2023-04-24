@@ -90,11 +90,11 @@ public:
     }
   }
 
-  const std::map<pcl::uint64_t, VPointCloud::Ptr> &get_scan_data() const {
+  const std::map<uint64_t, VPointCloud::Ptr> &get_scan_data() const {
     return scan_data_;
   }
 
-  const std::map<pcl::uint64_t, VPointCloud::Ptr> &get_scan_data_in_map() const {
+  const std::map<uint64_t, VPointCloud::Ptr> &get_scan_data_in_map() const {
     return scan_data_in_map_;
   }
 
@@ -120,7 +120,7 @@ private:
     for (int h = 0; h < scan_raw.height; h++) {
       for (int w = 0; w < scan_raw.width; w++) {
         VPoint vpoint;
-        if (pcl_isnan(scan_raw.at(w,h).x)) {
+        if (std::isnan(scan_raw.at(w,h).x)) {
           vpoint = NanPoint;
           scan_in_target->at(w,h) = vpoint;
           continue;
@@ -153,8 +153,8 @@ private:
   TrajectoryManager::Ptr traj_manager_;
   std::shared_ptr<IO::LioDataset> dataset_reader_;
 
-  std::map<pcl::uint64_t, VPointCloud::Ptr> scan_data_;
-  std::map<pcl::uint64_t, VPointCloud::Ptr> scan_data_in_map_;
+  std::map<uint64_t, VPointCloud::Ptr> scan_data_;
+  std::map<uint64_t, VPointCloud::Ptr> scan_data_in_map_;
   VPointCloud::Ptr map_cloud_;
 };
 

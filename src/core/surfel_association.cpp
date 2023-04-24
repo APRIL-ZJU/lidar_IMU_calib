@@ -260,7 +260,7 @@ void SurfelAssociation::associateScanToSurfel(
   for (int j = 0 ; j < scan->height; j++) {
     std::vector<int> mask_per_ring;
     for (int i=0; i< scan->width; i++) {
-      if (!pcl_isnan(scan->at(i,j).x) &&
+      if (!std::isnan(scan->at(i,j).x) &&
           scan->at(i,j).x > box_min[0] && scan->at(i,j).x < box_max[0] &&
           scan->at(i,j).y > box_min[1] && scan->at(i,j).y < box_max[1] &&
           scan->at(i,j).z > box_min[2] && scan->at(i,j).z < box_max[2]) {
